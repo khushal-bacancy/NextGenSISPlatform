@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { SchoolCreateForm } from "@/components/admin/school-create-form";
+import { SchoolList } from "@/components/admin/school-list";
+import { UserList } from "@/components/admin/user-list";
 import { UserInviteForm } from "@/components/admin/user-invite-form";
+import { RegistrationReviewPanel } from "@/components/admin/registration-review-panel";
 import { getDefaultRoute, hasFeatureAccess } from "@/lib/auth/permissions";
 import { getCurrentRole } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
@@ -49,7 +52,10 @@ export default async function AdminSetupPage() {
           </p>
         ) : null}
         {profile?.role === "super_admin" ? <SchoolCreateForm /> : null}
+        {canManageAdminSetup ? <SchoolList /> : null}
         {canManageAdminSetup ? <UserInviteForm schools={schools} /> : null}
+        {canManageAdminSetup ? <UserList /> : null}
+        {canManageAdminSetup ? <RegistrationReviewPanel /> : null}
       </div>
     </section>
   );

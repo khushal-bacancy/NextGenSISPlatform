@@ -18,6 +18,10 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 10:05) Add core server actions for enrollment, attendance, and grade entry
 - [x] (2026-03-14 11:13) Add RBAC migration for `super_admin`/`school_admin` roles and school-scoped RLS policies
 - [x] (2026-03-14 11:13) Add admin APIs for school creation and teacher/staff/school-admin invitation
+- [x] (2026-03-14 12:05) Add enrollment document + verification schema, API handling, and storage-backed uploads
+- [x] (2026-03-14 12:22) Add storage policy migration for `next-gen-sis` upload bucket
+- [x] (2026-03-14 12:34) Add public registration requests API and documents handling
+- [x] (2026-03-14 12:44) Add admin approval endpoint to convert registration requests to enrollments
 
 ## UI Vertical Slice
 - [x] (2026-03-14 10:05) Add dashboard feature pages for enrollment, attendance, grades, portal, reports
@@ -29,6 +33,8 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 11:36) Redesign landing UX: signed-in name display, remove MVP tagline, and add custom illustration assets
 - [x] (2026-03-14 11:41) Redesign auth screens with school/student illustrations and smooth reveal/float transitions
 - [x] (2026-03-14 11:54) Add role-based UI visibility: nav filtering and per-page access guards
+- [x] (2026-03-14 12:34) Add public student registration page with document upload
+- [x] (2026-03-14 12:44) Add admin UI panel to review and approve/reject registration requests
 
 ## Quality
 - [x] (2026-03-14 10:05) Add unit tests for validation schemas and API route guards
@@ -47,7 +53,7 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 
 ## PRD Feature Matrix
 - [x] (2026-03-14 11:26) Student Registration & Enrollment — Implemented (MVP)
-- [~] (2026-03-14 11:26) Academic Records Management — Partial (core records present, transcript/history workflows pending)
+- [x] (2026-03-14 16:05) Academic Records Management — Implemented (transcripts + historical records + grade entry)
 - [x] (2026-03-14 11:26) Gradebook Integration — Implemented (basic entry + storage)
 - [x] (2026-03-14 11:26) Attendance Tracking — Implemented (basic entry + storage + RBAC)
 - [~] (2026-03-14 11:26) Schedule Management — Partial (courses/sections schema present, full scheduling UX pending)

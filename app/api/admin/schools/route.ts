@@ -55,3 +55,38 @@ export async function POST(request: Request): Promise<Response> {
     return badRequest(error instanceof Error ? error.message : "Unauthorized");
   }
 }
+
+export async function DELETE(request: Request): Promise<Response> {
+  try {
+    const context = await requireAdminContext();
+    if (context.role !== "super_admin") {
+      return badRequest("Only super_admin can delete schools.");
+    }
+
+    const body = (await request.json()) as { schoolId?: string };
+    if (!body.schoolId) {
+      return badRequest("Missing schoolId.");
+    }
+
+    const service = createServiceClient();
+    const { count: enrollmentCount, error: enrollError } = await service
+      .from("enrollments")
+      .select("id", { count: "exact", head: true })
+      .eq("school_id", body.schoolId);
+    if (enrollError) {
+      return serverError(enrollError.message);
+    }
+    if ((enrollmentCount ?? 0) > 0) {
+      return badRequest("Cannot delete a school with active enrollments. Archive or remove enrollments first.");
+    }
+
+    const { error } = await service.from("schools").delete().eq("id", body.schoolId);
+    if (error) {
+      return serverError(error.message);
+    }
+
+    return ok({ schoolId: body.schoolId });
+  } catch (error) {
+    return badRequest(error instanceof Error ? error.message : "Unauthorized");
+  }
+}

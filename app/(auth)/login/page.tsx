@@ -14,9 +14,6 @@ export default function LoginPage() {
       subtitle="Sign in to access your school workspace, manage records, and continue your role-specific tasks."
       imageSrc="/illustrations/auth-school-life.svg"
       imageAlt="Illustration of school campus and digital learning spaces"
-      footerText="Need a new account?"
-      footerLinkLabel="Register"
-      footerHref="/register"
     >
       <AuthForm mode="login" />
     </AuthVisualShell>

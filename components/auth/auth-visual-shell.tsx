@@ -7,9 +7,9 @@ type AuthVisualShellProps = {
   subtitle: string;
   imageSrc: "/illustrations/auth-school-life.svg" | "/illustrations/auth-students.svg";
   imageAlt: string;
-  footerText: string;
-  footerLinkLabel: string;
-  footerHref: "/login" | "/register";
+  footerText?: string;
+  footerLinkLabel?: string;
+  footerHref?: "/login" | "/register";
   children: ReactNode;
 };
 
@@ -33,12 +33,14 @@ export function AuthVisualShell({
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">{title}</h1>
           <p className="max-w-lg text-slate-600">{subtitle}</p>
           <div className="reveal-up reveal-delay-1">{children}</div>
-          <p className="reveal-up reveal-delay-2 text-sm text-slate-500">
-            {footerText}{" "}
-            <Link className="font-medium text-sky-700 hover:text-sky-800" href={footerHref}>
-              {footerLinkLabel}
-            </Link>
-          </p>
+          {footerText && footerLinkLabel && footerHref ? (
+            <p className="reveal-up reveal-delay-2 text-sm text-slate-500">
+              {footerText}{" "}
+              <Link className="font-medium text-sky-700 hover:text-sky-800" href={footerHref}>
+                {footerLinkLabel}
+              </Link>
+            </p>
+          ) : null}
         </article>
 
         <aside className="reveal-up reveal-delay-1">
@@ -55,4 +57,3 @@ export function AuthVisualShell({
     </main>
   );
 }
-

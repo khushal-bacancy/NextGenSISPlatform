@@ -20,3 +20,33 @@
 [2026-03-14 11:41] coordinator — Redesigned login/register/reset screens with custom school/student illustrations and added smooth reveal/float transitions in global styles.
 [2026-03-14 11:54] coordinator — Implemented role-based UI visibility with permission map, filtered dashboard navigation, and per-page access guards with redirects.
 [2026-03-14 12:12] coordinator — Added README with setup, migration, bootstrap, and role access instructions.
+[2026-03-14 12:05] coordinator — Added enrollment document uploads and verification workflow (DB tables, API handling, UI, and Supabase storage integration).
+[2026-03-14 12:22] coordinator — Updated enrollment uploads to use Supabase bucket `next-gen-sis` and documented it in README.
+[2026-03-14 12:23] coordinator — Added and applied storage policy migration for authenticated uploads to `next-gen-sis`.
+[2026-03-14 12:34] coordinator — Added public student registration workflow with `/register` page, API endpoint, and DB tables for requests and documents.
+[2026-03-14 12:44] coordinator — Added admin registration review panel and approval API to convert requests into enrollments.
+[2026-03-14 12:58] coordinator — Updated storage policy migration to be idempotent and allow anon uploads for public registration.
+[2026-03-14 13:08] coordinator — Added storage update policies to support upsert uploads for anon/authenticated users.
+[2026-03-14 13:18] coordinator — Routed document uploads through signed URLs (service role) to bypass storage RLS errors.
+[2026-03-14 13:24] coordinator — Switched public registration request inserts to service role API to bypass RLS insert failures.
+[2026-03-14 13:40] coordinator — Added registration status page, admin document viewing via signed URLs, and school-admin seed script.
+[2026-03-14 13:52] coordinator — Added status lookup on registration page and a submission loading overlay.
+[2026-03-14 14:05] coordinator — Made registration status lookup email-only and added route-level loading UI.
+[2026-03-14 14:18] coordinator — Added approval assignment fields and a global loading screen plus status empty state.
+[2026-03-14 14:30] coordinator — Normalized registration status lookups by email and added global route-change loader.
+[2026-03-14 14:45] coordinator — Added E2E registration/approval test and fixed admin login redirect plus status lookup casing.
+[2026-03-14 14:57] coordinator — Normalized registration email storage and adjusted Playwright webServer binding.
+[2026-03-14 15:12] coordinator — Added public school dropdown, fixed status matching, and improved admin processing feedback.
+[2026-03-14 15:22] coordinator — Added animated validation toasts for smoother form error feedback.
+[2026-03-14 15:32] coordinator — Made public registration grade required and added status lookup on status page.
+[2026-03-14 15:40] coordinator — Updated registration page hero to a back-to-school campus illustration.
+[2026-03-14 16:06] coordinator — Added academic records/transcripts schema, APIs, and dashboard forms.
+[2026-03-14 16:18] coordinator — Added migration runner script with applied-migration tracking.
+[2026-03-14 16:28] coordinator — Added migration baseline option for existing Supabase databases.
+[2026-03-14 16:40] coordinator — Updated grade entry form to use server-fed dropdowns to prevent FK errors.
+[2026-03-14 16:55] coordinator — Added academic records/transcripts list views for admin/staff and student portal.
+[2026-03-14 17:12] coordinator — Added student profile linkage and approval-time student account creation.
+[2026-03-14 17:24] coordinator — Fixed registration status route handling and submission redirect response parsing.
+[2026-03-14 17:36] coordinator — Fixed status page data parsing and added login CTA.
+[2026-03-14 17:55] coordinator — Added admin school/user list management with delete actions.
+[2026-03-14 18:08] coordinator — Fixed user listing API and added collapsible admin lists.

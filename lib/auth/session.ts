@@ -2,6 +2,16 @@ import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 import type { AppRole } from "@/lib/auth/permissions";
 
+function normalizeRole(role: string | null | undefined): AppRole | null {
+  if (!role) {
+    return null;
+  }
+  if (role === "admin") {
+    return "school_admin";
+  }
+  return role as AppRole;
+}
+
 export async function getCurrentRole(): Promise<AppRole | null> {
   if (!hasSupabaseEnv()) {
     return null;
@@ -22,5 +32,5 @@ export async function getCurrentRole(): Promise<AppRole | null> {
     .eq("id", user.id)
     .maybeSingle();
 
-  return (data?.role as AppRole | null) ?? null;
+  return normalizeRole(data?.role) ?? null;
 }

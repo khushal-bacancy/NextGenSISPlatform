@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ValidationToast } from "@/components/ui/validation-toast";
 import { createClient } from "@/lib/supabase/client";
+import { getDefaultRoute } from "@/lib/auth/permissions";
 
 type AuthMode = "login" | "register";
 
@@ -78,14 +80,22 @@ export function AuthForm({ mode }: AuthFormProps) {
           return;
         }
 
-        router.push("/enrollment");
+        const target =
+          selectedRole === "super_admin" || selectedRole === "school_admin"
+            ? "/admin"
+            : getDefaultRoute(profile.role);
+        router.push(target);
       }
     } else {
       const { error } = await supabase.auth.signUp({ email, password });
       if (error) {
         setErrorMessage(error.message);
       } else {
-        router.push("/enrollment");
+        const target =
+          selectedRole === "super_admin" || selectedRole === "school_admin"
+            ? "/admin"
+            : getDefaultRoute("student");
+        router.push(target);
       }
     }
 
@@ -123,7 +133,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           </select>
         </div>
       ) : null}
-      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
+      <ValidationToast message={errorMessage} variant="error" />
       <Button className="w-full" type="submit" disabled={isLoading}>
         {isLoading ? "Submitting..." : mode === "login" ? "Sign in" : "Create account"}
       </Button>

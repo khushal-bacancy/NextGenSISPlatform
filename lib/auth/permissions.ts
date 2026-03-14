@@ -27,6 +27,9 @@ export function hasFeatureAccess(role: AppRole, feature: AppFeature): boolean {
 }
 
 export function getDefaultRoute(role: AppRole): Route {
+  if (role === "super_admin" || role === "school_admin") {
+    return "/admin";
+  }
   const firstFeature = roleFeatureMap[role][0] ?? "portal";
   return featureNavMap[firstFeature].href;
 }

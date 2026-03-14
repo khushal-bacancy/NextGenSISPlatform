@@ -29,3 +29,28 @@
   Rationale: Keeps onboarding/auth flows visually consistent with landing experience while preserving performance and mobile responsiveness.
 - UI navigation and page access are now filtered by role using a centralized permission map.
   Rationale: Users should only see and access features that match their role permissions, reducing confusion and accidental access.
+- Document uploads for public registration/enrollment use server-generated signed URLs instead of direct client uploads.
+  Rationale: Avoids brittle storage RLS errors while preserving private buckets and keeping service role credentials server-side.
+- Public registration request inserts are handled via server-side service role client with strict schema validation.
+  Rationale: Ensures anonymous submissions succeed without weakening RLS rules for other roles/tables.
+- Public-facing registration status uses a request-id + email lookup endpoint.
+- Public-facing registration status uses an email-only lookup and shows recent requests.
+  Rationale: Reduces friction for registrants while keeping access limited to their email.
+- Registration approvals support assigning school/grade at review time.
+  Rationale: Allows optional fields at submission while still enforcing required data before enrollment.
+- Global route-change loader is shown on navigation to reduce perceived freezing between pages.
+  Rationale: Lightweight feedback for static routes without adding extra data fetching.
+- E2E tests use environment-provided admin credentials and upload a local image for registration flow validation.
+  Rationale: Keeps secrets out of repo and ensures coverage of the most critical workflow.
+- Public registration uses a school dropdown sourced from a public API endpoint.
+  Rationale: Prevents copy/paste UUID errors while keeping school selection optional.
+- Academic records management adds dedicated transcript and historical record tables instead of overloading report cards.
+  Rationale: Separates term summaries from event-based academic records for clearer querying and auditing.
+- Migrations are now applied via a runner that records applied files in `schema_migrations`.
+  Rationale: Prevents rerun failures when policies already exist.
+- Migration runner supports baselining to mark pre-existing migrations as applied.
+  Rationale: Allows adoption on already-provisioned Supabase projects without rerunning old SQL.
+- Student accounts are created on registration approval with a temporary password.
+  Rationale: Enables immediate login after approval without public password collection.
+- Admin dashboard now exposes list + delete actions for schools and users.
+  Rationale: Gives super_admin operational control without direct DB access.

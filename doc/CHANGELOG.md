@@ -33,3 +33,32 @@
 - Added smooth motion utilities (`reveal-up`, delayed reveals, `float-soft`) and applied them to auth visuals.
 - Added role-based UI visibility: permission map, filtered dashboard navigation, and per-page feature access guards with redirects.
 - Added README with setup, migration, bootstrap, and role access instructions.
+- Added enrollment document upload and verification workflow tables, API handling, and UI fields for document upload + verification.
+- Updated enrollment upload bucket name to `next-gen-sis` and documented it in README.
+- Added storage policy migration allowing authenticated uploads to bucket `next-gen-sis`.
+- Added public student registration workflow (requests + documents tables, API, and `/register` page) with document upload.
+- Added admin registration review panel and approval endpoint to convert public registration requests into enrollments.
+- Made `next-gen-sis` storage upload policy migration idempotent and added anon insert/update policy for public registration docs.
+- Switched document uploads to server-generated signed upload URLs to avoid client-side RLS failures.
+- Routed public registration request inserts through service role server API to avoid RLS insert failures.
+- Added public registration status page, signed document viewing for admins, and school-admin seeding script.
+- Added registration status lookup on the registration page plus a loading overlay during submission.
+- Switched status lookup to email-only and added `/register` route loading state.
+- Added email-only registration status empty state, admin assignment fields for approval, and global loading UI.
+- Normalized registration emails and enforced approval assignments; added route-change loader for all pages.
+- Added Playwright E2E flow for registration submission and admin approval; fixed admin login redirect and case-insensitive status lookup.
+- Normalized stored registration emails and updated Playwright webServer command for localhost binding.
+- Added public school dropdown, normalized role handling, and improved status lookup + admin processing UX.
+- Added animated validation toasts for smoother error feedback on forms.
+- Made registration grade required on public form and added status lookup helper on status page.
+- Updated registration page hero image to a back-to-school campus illustration.
+- Added academic records + transcript tables, API endpoints, and dashboard forms for historical academic management.
+- Added migration runner script that skips already-applied migrations.
+- Added baseline option for the migration runner to align with existing databases.
+- Switched grade entry to server-fed student/section dropdowns to prevent FK errors.
+- Added transcript and academic record list views for admin/staff and student portal.
+- Added student profile linkage, approval-time student account creation, and status-page login CTA.
+- Fixed registration redirect handling and async searchParams usage in status page.
+- Fixed status page data parsing and added always-visible login CTA.
+- Added admin lists for schools and users with delete actions.
+- Fixed admin user listing to use auth admin API and reduced list clutter with collapsible panels.

@@ -4,6 +4,10 @@
 - `supabase/migrations/20260314100500_init_sis_mvp.sql`
 - `supabase/migrations/20260314102149_attendance_rls_staff_admin.sql`
 - `supabase/migrations/20260314103748_rbac_bootstrap_and_invite.sql`
+- `supabase/migrations/20260314115724_enrollment_documents_verification.sql`
+- `supabase/migrations/20260314120801_storage_policy_next_gen_sis.sql`
+- `supabase/migrations/20260314121748_student_registration_requests.sql`
+- `supabase/migrations/20260314160000_academic_records_transcripts.sql`
 
 ## Core Tables
 - `public.profiles`: user profile and SIS role (`super_admin`, `school_admin`, `staff`, `teacher`, `parent`, `student`) with school binding.
@@ -15,11 +19,19 @@
 - `public.attendance_records`: per-student per-section attendance entries.
 - `public.grade_entries`: assignment/assessment grade entries.
 - `public.report_cards`: summarized term-level report data.
+- `public.student_documents`: document uploads tied to student records.
+- `public.enrollment_verifications`: verification workflow state per enrollment.
+- `public.registration_requests`: public student registration intake.
+- `public.registration_documents`: uploaded files tied to registration requests.
+- `public.transcripts`: term-level transcript summaries (GPA, credits, class rank).
+- `public.academic_records`: historical academic record entries (achievements, notes, transfers).
+- `public.profiles.student_id`: link profiles to student records (nullable).
 
 ## RLS Summary
 - RLS enabled on every table.
 - Access enforced through profile role + school scoping + uid checks.
 - Policies use `(select auth.uid())` pattern for stability/performance.
+- Storage uploads to bucket `next-gen-sis` allow inserts and updates for `authenticated` and `anon` (public registration).
 
 ## RLS Updates
 - `attendance_records`: replaced teacher-only policy with `attendance manage by teacher or staff`.
