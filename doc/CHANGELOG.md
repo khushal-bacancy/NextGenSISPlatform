@@ -77,3 +77,4 @@
 - Added `scripts/seed-parent-student.mjs` and `pnpm seed:parent-student` to create demo school, student, parent, enrollment, profile links, and guardian mapping.
 - Updated guardian mapping empty-state guidance to run the new seed command.
 - Added `public/back-to-school.jpg` and switched `/login` + `/register` hero media to this image.
+- Fixed registration review panel approve handler to parse `/api/admin/registrations` response from `ApiEnvelope.data`, restoring temp password display.

@@ -70,3 +70,5 @@
   Rationale: Fast bootstrap for portal visibility and guardian mapping verification without manual SQL.
 - Auth and public registration visual surfaces now share the same `back-to-school.jpg` asset when provided.
   Rationale: Maintains consistent visual branding across entry flows.
+- Admin approval client handlers must consume the shared API envelope (`{ data, error }`) instead of direct top-level fields.
+  Rationale: Prevents missing success payloads (e.g., temp credentials) in UI flows.

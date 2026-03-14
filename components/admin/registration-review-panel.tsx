@@ -112,7 +112,10 @@ export function RegistrationReviewPanel() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ requestId, action, schoolId, gradeLevel })
     });
-    const payload = (await response.json()) as { error: string | null; tempPassword?: string | null; loginEmail?: string | null };
+    const payload = (await response.json()) as {
+      error: string | null;
+      data: { status: string; tempPassword: string | null; loginEmail: string | null } | null;
+    };
     if (payload.error) {
       setMessage(`Error: ${payload.error}`);
       setActiveRequestId(null);
@@ -120,8 +123,8 @@ export function RegistrationReviewPanel() {
       return;
     }
     setMessage(`Request ${action}d.`);
-    if (action === "approve" && payload.loginEmail) {
-      setApprovedLogin({ email: payload.loginEmail, tempPassword: payload.tempPassword ?? null });
+    if (action === "approve" && payload.data?.loginEmail) {
+      setApprovedLogin({ email: payload.data.loginEmail, tempPassword: payload.data.tempPassword ?? null });
     }
     await loadRequests();
     setActiveRequestId(null);

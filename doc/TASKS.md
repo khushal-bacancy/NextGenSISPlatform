@@ -70,3 +70,4 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 16:57) Fix guardian mapping panel API envelope parsing so parent/student dropdowns populate
 - [x] (2026-03-14 17:01) Add and run one-command seed for parent/student/guardian mapping data
 - [x] (2026-03-14 17:06) Use `back-to-school.jpg` on /login and /register pages
+- [x] (2026-03-14 17:36) Fix admin approval temp-password visibility by parsing API envelope correctly
