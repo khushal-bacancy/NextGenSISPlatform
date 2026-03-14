@@ -89,7 +89,7 @@ export async function POST(request: Request): Promise<Response> {
     const service = createServiceClient();
     const { data: requestRow, error: fetchError } = await service
       .from("registration_requests")
-      .select("id, first_name, last_name, school_id, grade_level, status")
+      .select("id, first_name, last_name, email, school_id, grade_level, status")
       .eq("id", body.requestId)
       .maybeSingle();
 
@@ -204,11 +204,14 @@ export async function POST(request: Request): Promise<Response> {
       });
 
       if (userError) {
-        const { data: existing } = await service.auth.admin.getUserByEmail(requestRow.email);
-        if (existing?.user) {
-          loginEmail = existing.user.email ?? requestRow.email;
+        const { data: existingUsers } = await service.auth.admin.listUsers({ perPage: 1000 });
+        const existingUser = existingUsers?.users?.find(
+          (user) => user.email?.toLowerCase() === requestRow.email?.toLowerCase()
+        );
+        if (existingUser) {
+          loginEmail = existingUser.email ?? requestRow.email;
           const { error: profileError } = await service.from("profiles").upsert({
-            id: existing.user.id,
+            id: existingUser.id,
             full_name: `${requestRow.first_name} ${requestRow.last_name}`,
             role: "student",
             school_id: resolvedSchoolId,

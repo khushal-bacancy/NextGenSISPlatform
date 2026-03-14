@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export function RouteLoader() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
     const timer = setTimeout(() => setIsVisible(false), 900);
     return () => clearTimeout(timer);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   if (!isVisible) {
     return null;

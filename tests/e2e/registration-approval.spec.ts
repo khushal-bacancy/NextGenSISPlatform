@@ -7,6 +7,11 @@ test.describe("public registration + admin approval", () => {
   test.skip(!adminEmail || !adminPassword, "Missing E2E_SUPER_ADMIN_EMAIL or E2E_SUPER_ADMIN_PASSWORD");
 
   test("student submits registration and admin approves", async ({ page }) => {
+    if (!adminEmail || !adminPassword) {
+      test.skip();
+      return;
+    }
+
     const timestamp = Date.now();
     const email = `student+${timestamp}@example.com`;
 

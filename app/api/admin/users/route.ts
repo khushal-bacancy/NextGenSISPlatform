@@ -35,7 +35,6 @@ export async function GET(): Promise<Response> {
       return serverError(profileError.message);
     }
 
-    const ids = (profiles ?? []).map((profile) => profile.id);
     const { data: usersPage, error: userError } = await service.auth.admin.listUsers({ perPage: 200 });
     if (userError) {
       return serverError(userError.message);

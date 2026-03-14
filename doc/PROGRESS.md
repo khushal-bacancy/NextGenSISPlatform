@@ -51,3 +51,4 @@
 [2026-03-14 17:55] coordinator — Added admin school/user list management with delete actions.
 [2026-03-14 18:08] coordinator — Fixed user listing API and added collapsible admin lists.
 [2026-03-14 18:22] coordinator — Updated enrollment form to use school dropdown wired from server-side school list.
+[2026-03-14 18:34] coordinator — Fixed build blockers for Vercel (type errors + static worker crash) and verified `pnpm build` passes.
