@@ -26,14 +26,16 @@ export default function StudentRegistrationPage() {
           <StudentRegistrationForm />
           <RegistrationStatusLookup />
         </div>
-        <Image
-          src="/illustrations/hero-campus.svg"
-          width={980}
-          height={760}
-          alt="Back to school campus illustration"
-          className="h-auto w-full rounded-xl border"
-          priority
-        />
+        <div className="relative min-h-[320px]">
+          <Image
+            src="/register.jpg"
+            width={980}
+            height={760}
+            alt="Registration page school visual"
+            className="h-full w-full rounded-xl border object-cover"
+            priority
+          />
+        </div>
       </section>
     </main>
   );

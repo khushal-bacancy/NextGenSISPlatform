@@ -5,6 +5,7 @@ import { SchoolCreateForm } from "@/components/admin/school-create-form";
 import { SchoolList } from "@/components/admin/school-list";
 import { UserList } from "@/components/admin/user-list";
 import { UserInviteForm } from "@/components/admin/user-invite-form";
+import { GuardianMappingPanel } from "@/components/admin/guardian-mapping-panel";
 import { RegistrationReviewPanel } from "@/components/admin/registration-review-panel";
 import { getDefaultRoute, hasFeatureAccess } from "@/lib/auth/permissions";
 import { getCurrentRole } from "@/lib/auth/session";
@@ -55,6 +56,7 @@ export default async function AdminSetupPage() {
         {canManageAdminSetup ? <SchoolList /> : null}
         {canManageAdminSetup ? <UserInviteForm schools={schools} /> : null}
         {canManageAdminSetup ? <UserList /> : null}
+        {canManageAdminSetup ? <GuardianMappingPanel /> : null}
         {canManageAdminSetup ? <RegistrationReviewPanel /> : null}
       </div>
     </section>

@@ -62,3 +62,11 @@
   Rationale: `students` is school-agnostic in schema; enrollment is the tenant binding.
 - Parent/student grade visibility is implemented on `grade_entries` via a dedicated select policy plus portal UI list rendering.
   Rationale: Keeps grade data in one source table while exposing role-appropriate read access without duplicating records.
+- Guardian relationship management is now handled through admin API/UI instead of requiring direct SQL edits.
+  Rationale: Reduces operational risk and enables non-technical admins to manage parent access safely.
+- Admin panel fetch clients must parse the shared `ApiEnvelope<T>` shape (`{ data, error }`) consistently.
+  Rationale: Prevents silent empty states despite successful backend responses.
+- Demo data seeding for parent/student access is standardized through `pnpm seed:parent-student`.
+  Rationale: Fast bootstrap for portal visibility and guardian mapping verification without manual SQL.
+- Auth and public registration visual surfaces now share the same `back-to-school.jpg` asset when provided.
+  Rationale: Maintains consistent visual branding across entry flows.

@@ -12,6 +12,7 @@
     "test:e2e": "playwright test",
     "bootstrap:super-admin": "node scripts/bootstrap-super-admin.mjs",
     "seed:school-admin": "node scripts/seed-school-admin.mjs",
+    "seed:parent-student": "node scripts/seed-parent-student.mjs",
     "migrate": "node scripts/migrate.js"
   },
   "dependencies": {

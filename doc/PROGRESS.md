@@ -58,3 +58,7 @@
 [2026-03-14 16:40] coordinator — Added school-first filtering on the grades form so student options are scoped to the selected school; typecheck passed.
 [2026-03-14 16:42] coordinator — Fixed grades student dropdown population by loading students through enrollments (school_id mapping); typecheck passed.
 [2026-03-14 16:47] coordinator — Added grade entry list UI to grades and portal pages and created RLS migration for guardian/linked-student grade visibility; typecheck passed.
+[2026-03-14 16:54] coordinator — Added admin guardian mapping API and panel to assign/remove parent-student links without SQL; lint and typecheck passed.
+[2026-03-14 16:57] coordinator — Fixed guardian mapping panel to parse `{ data, error }` API envelope correctly; dropdowns now populate from payload.data.
+[2026-03-14 17:01] coordinator — Added `seed:parent-student` script (auto-creates school if needed) and executed it successfully to populate parent/student dropdown data.
+[2026-03-14 17:06] coordinator — Moved `back-to-school.jpg` to `public/` and integrated it into /login and /register visuals; typecheck passed.

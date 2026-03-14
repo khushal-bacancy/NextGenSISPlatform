@@ -66,3 +66,7 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [ ] (2026-03-14 11:26) Communication Hub — Not started
 - [x] (2026-03-14 16:42) Fix grades school-student filtering by sourcing students via enrollments.school_id
 - [x] (2026-03-14 16:47) Show saved grade entries in grades workspace and parent/student portal views
+- [x] (2026-03-14 16:54) Add admin parent-student mapping UI/API to manage guardians without SQL
+- [x] (2026-03-14 16:57) Fix guardian mapping panel API envelope parsing so parent/student dropdowns populate
+- [x] (2026-03-14 17:01) Add and run one-command seed for parent/student/guardian mapping data
+- [x] (2026-03-14 17:06) Use `back-to-school.jpg` on /login and /register pages

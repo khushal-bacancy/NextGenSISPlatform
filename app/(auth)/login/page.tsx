@@ -12,8 +12,8 @@ export default function LoginPage() {
     <AuthVisualShell
       title="Welcome back"
       subtitle="Sign in to access your school workspace, manage records, and continue your role-specific tasks."
-      imageSrc="/illustrations/auth-school-life.svg"
-      imageAlt="Illustration of school campus and digital learning spaces"
+      imageSrc="/login.jpg"
+      imageAlt="Login page school visual"
     >
       <AuthForm mode="login" />
     </AuthVisualShell>

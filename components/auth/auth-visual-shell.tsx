@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 type AuthVisualShellProps = {
   title: string;
   subtitle: string;
-  imageSrc: "/illustrations/auth-school-life.svg" | "/illustrations/auth-students.svg";
+  imageSrc: "/illustrations/auth-school-life.svg" | "/illustrations/auth-students.svg" | "/back-to-school.jpg" | "/login.jpg";
   imageAlt: string;
   footerText?: string;
   footerLinkLabel?: string;
@@ -43,13 +43,13 @@ export function AuthVisualShell({
           ) : null}
         </article>
 
-        <aside className="reveal-up reveal-delay-1">
+        <aside className="reveal-up reveal-delay-1 relative min-h-[320px]">
           <Image
             src={imageSrc}
             width={980}
             height={760}
             alt={imageAlt}
-            className="float-soft h-auto w-full rounded-xl border"
+            className="h-full w-full rounded-xl border object-cover"
             priority
           />
         </aside>

@@ -71,3 +71,9 @@
 - Fixed grades school filter bug by deriving student options from `enrollments.school_id` + joined `students` instead of non-existent `students.school_id`.
 - Added grade entry list components on `/grades` and `/portal` so saved grades are visible by role-scoped users.
 - Added migration `20260314164500_grade_entries_parent_student_read.sql` to allow guardian and linked student read access to `grade_entries`.
+- Added `GET/POST/DELETE /api/admin/guardians` for role-scoped parent-student mapping management.
+- Added Admin UI panel `Parent-Student Mapping` with assign/remove flows and live list refresh.
+- Fixed guardian mapping panel response parsing to read `payload.data.parents/students/mappings` from API envelope.
+- Added `scripts/seed-parent-student.mjs` and `pnpm seed:parent-student` to create demo school, student, parent, enrollment, profile links, and guardian mapping.
+- Updated guardian mapping empty-state guidance to run the new seed command.
+- Added `public/back-to-school.jpg` and switched `/login` + `/register` hero media to this image.
