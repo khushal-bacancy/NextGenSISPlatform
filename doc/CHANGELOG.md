@@ -65,3 +65,4 @@
 - Updated `/enrollment` to use school name dropdown selection instead of manual school UUID input.
 - Fixed Vercel build issues: admin registration typing and static build crash from global route loader search params usage.
 - Added post-build manifest patch script to handle missing `page_client-reference-manifest.js` in Next 15 route-group root pages.
+- Added `vercel.json` to pin Vercel install/build commands to local pnpm workflow.

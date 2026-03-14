@@ -53,3 +53,4 @@
 [2026-03-14 18:22] coordinator — Updated enrollment form to use school dropdown wired from server-side school list.
 [2026-03-14 18:34] coordinator — Fixed build blockers for Vercel (type errors + static worker crash) and verified `pnpm build` passes.
 [2026-03-14 18:48] coordinator — Added post-build fix for missing client-reference manifest to unblock Vercel trace phase.
+[2026-03-14 19:02] coordinator — Added `vercel.json` to align Vercel install/build commands with local workflow.
