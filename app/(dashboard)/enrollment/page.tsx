@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { EnrollmentForm } from "@/components/enrollment/enrollment-form";
 import { getDefaultRoute, hasFeatureAccess } from "@/lib/auth/permissions";
 import { getCurrentRole } from "@/lib/auth/session";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Enrollment | NextGen SIS"
@@ -18,10 +19,13 @@ export default async function EnrollmentPage() {
     redirect(getDefaultRoute(role));
   }
 
+  const supabase = await createClient();
+  const { data: schools } = await supabase.from("schools").select("id, name").order("name", { ascending: true });
+
   return (
     <section className="space-y-4">
       <h1 className="text-2xl font-semibold">Student enrollment</h1>
-      <EnrollmentForm />
+      <EnrollmentForm schools={schools ?? []} />
     </section>
   );
 }

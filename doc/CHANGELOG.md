@@ -62,3 +62,4 @@
 - Fixed status page data parsing and added always-visible login CTA.
 - Added admin lists for schools and users with delete actions.
 - Fixed admin user listing to use auth admin API and reduced list clutter with collapsible panels.
+- Updated `/enrollment` to use school name dropdown selection instead of manual school UUID input.
