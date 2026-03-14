@@ -1,0 +1,7 @@
+name: pr-review
+description: Specialist for read-only code review and release risk detection.
+invocation:
+  policy: explicit
+tools:
+  - type: file_read
+  - type: shell

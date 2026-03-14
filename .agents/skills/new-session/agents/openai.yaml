@@ -1,0 +1,7 @@
+name: new-session
+description: Session bootstrap summarizer for project state.
+invocation:
+  policy: implicit
+tools:
+  - type: file_read
+  - type: shell
