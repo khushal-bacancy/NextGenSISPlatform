@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { GradeForm } from "@/components/grades/grade-form";
+import { GradeEntryList } from "@/components/grades/grade-entry-list";
 import { AcademicRecordForm } from "@/components/academics/academic-record-form";
 import { AcademicRecordList } from "@/components/academics/academic-record-list";
 import { TranscriptForm } from "@/components/academics/transcript-form";
@@ -24,10 +25,56 @@ export default async function GradesPage() {
   }
 
   const supabase = await createClient();
-  const { data: students } = await supabase
-    .from("students")
-    .select("id, first_name, last_name, student_number")
-    .order("first_name", { ascending: true })
+  const { data: enrollmentStudents } = await supabase
+    .from("enrollments")
+    .select("school_id, students!inner(id, first_name, last_name, student_number)")
+    .order("created_at", { ascending: false })
+    .limit(500);
+
+  type EnrollmentStudentRow = {
+    school_id: string;
+    students:
+      | {
+          id: string;
+          first_name: string;
+          last_name: string;
+          student_number: string;
+        }
+      | Array<{
+          id: string;
+          first_name: string;
+          last_name: string;
+          student_number: string;
+        }>
+      | null;
+  };
+
+  const students = Array.from(
+    new Map(
+      ((enrollmentStudents ?? []) as EnrollmentStudentRow[])
+        .flatMap((row) => {
+          const student = Array.isArray(row.students) ? row.students[0] : row.students;
+          if (!student) {
+            return [];
+          }
+          return [
+            {
+              id: student.id,
+              first_name: student.first_name,
+              last_name: student.last_name,
+              student_number: student.student_number,
+              school_id: row.school_id
+            }
+          ];
+        })
+        .map((student) => [`${student.school_id}:${student.id}`, student])
+    ).values()
+  );
+
+  const { data: schools } = await supabase
+    .from("schools")
+    .select("id, name")
+    .order("name", { ascending: true })
     .limit(200);
 
   const { data: sections } = await supabase
@@ -35,6 +82,14 @@ export default async function GradesPage() {
     .select("id, section_name, term")
     .order("section_name", { ascending: true })
     .limit(200);
+
+  const { data: gradeEntries } = await supabase
+    .from("grade_entries")
+    .select(
+      "id, student_id, section_id, assessment_name, points_earned, points_possible, submitted_at, students(first_name, last_name, student_number), sections(section_name, term)"
+    )
+    .order("submitted_at", { ascending: false })
+    .limit(50);
 
   const { data: transcripts } = await supabase
     .from("transcripts")
@@ -59,8 +114,9 @@ export default async function GradesPage() {
       <div className="grid gap-6">
         <div className="space-y-3">
           <h2 className="text-lg font-semibold">Grade entries</h2>
-          <GradeForm students={students ?? []} sections={sections ?? []} />
+          <GradeForm schools={schools ?? []} students={students} sections={sections ?? []} />
         </div>
+        <GradeEntryList entries={gradeEntries ?? []} />
         <TranscriptList transcripts={transcripts ?? []} />
         <AcademicRecordList records={records ?? []} />
         <div className="space-y-3">

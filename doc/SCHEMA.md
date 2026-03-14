@@ -8,6 +8,7 @@
 - `supabase/migrations/20260314120801_storage_policy_next_gen_sis.sql`
 - `supabase/migrations/20260314121748_student_registration_requests.sql`
 - `supabase/migrations/20260314160000_academic_records_transcripts.sql`
+- `supabase/migrations/20260314164500_grade_entries_parent_student_read.sql`
 
 ## Core Tables
 - `public.profiles`: user profile and SIS role (`super_admin`, `school_admin`, `staff`, `teacher`, `parent`, `student`) with school binding.
@@ -43,3 +44,4 @@
   - `students`, `enrollments`, `attendance_records`, and `grade_entries` now enforce role + school scope.
   - `courses`/`sections` read access scoped by school membership.
   - `report_cards` read access supports super admin, guardian, student, and school-scoped staff/teacher/admin.
+- `20260314164500_grade_entries_parent_student_read.sql` adds a select policy so guardians and linked student profiles can read `grade_entries` for their own student records.

@@ -67,3 +67,7 @@
 - Added post-build manifest patch script to handle missing `page_client-reference-manifest.js` in Next 15 route-group root pages.
 - Added `vercel.json` to pin Vercel install/build commands to local pnpm workflow.
 - Updated `vercel.json` install command to `pnpm install --no-frozen-lockfile` so Vercel can resolve patched `next` versions from semver ranges.
+- Updated grades workflow to require school selection first and filter student dropdown options to that school.
+- Fixed grades school filter bug by deriving student options from `enrollments.school_id` + joined `students` instead of non-existent `students.school_id`.
+- Added grade entry list components on `/grades` and `/portal` so saved grades are visible by role-scoped users.
+- Added migration `20260314164500_grade_entries_parent_student_read.sql` to allow guardian and linked student read access to `grade_entries`.

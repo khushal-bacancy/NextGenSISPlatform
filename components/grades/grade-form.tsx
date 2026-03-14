@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,12 @@ type StudentOption = {
   first_name: string;
   last_name: string;
   student_number: string;
+  school_id: string;
+};
+
+type SchoolOption = {
+  id: string;
+  name: string;
 };
 
 type SectionOption = {
@@ -20,12 +26,20 @@ type SectionOption = {
 };
 
 type GradeFormProps = {
+  schools: SchoolOption[];
   students: StudentOption[];
   sections: SectionOption[];
 };
 
-export function GradeForm({ students, sections }: GradeFormProps) {
+export function GradeForm({ schools, students, sections }: GradeFormProps) {
   const [message, setMessage] = useState<string>("");
+  const [selectedSchoolId, setSelectedSchoolId] = useState<string>("");
+  const [selectedStudentId, setSelectedStudentId] = useState<string>("");
+
+  const filteredStudents = useMemo(
+    () => students.filter((student) => student.school_id === selectedSchoolId),
+    [selectedSchoolId, students]
+  );
 
   async function submit(formData: FormData): Promise<void> {
     const payload = {
@@ -50,10 +64,39 @@ export function GradeForm({ students, sections }: GradeFormProps) {
   return (
     <form action={submit} className="grid gap-4 rounded-lg border bg-white p-4 md:grid-cols-2">
       <div className="space-y-2">
+        <Label htmlFor="schoolId">School</Label>
+        <select
+          id="schoolId"
+          name="schoolId"
+          className="h-10 w-full rounded-md border px-3 text-sm"
+          value={selectedSchoolId}
+          onChange={(event) => {
+            setSelectedSchoolId(event.target.value);
+            setSelectedStudentId("");
+          }}
+          required
+        >
+          <option value="">Select a school</option>
+          {schools.map((school) => (
+            <option key={school.id} value={school.id}>
+              {school.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="space-y-2">
         <Label htmlFor="studentId">Student</Label>
-        <select id="studentId" name="studentId" className="h-10 w-full rounded-md border px-3 text-sm" required>
-          <option value="">Select a student</option>
-          {students.map((student) => (
+        <select
+          id="studentId"
+          name="studentId"
+          className="h-10 w-full rounded-md border px-3 text-sm"
+          value={selectedStudentId}
+          onChange={(event) => setSelectedStudentId(event.target.value)}
+          required
+          disabled={!selectedSchoolId}
+        >
+          <option value="">{selectedSchoolId ? "Select a student" : "Select school first"}</option>
+          {filteredStudents.map((student) => (
             <option key={student.id} value={student.id}>
               {student.first_name} {student.last_name} ({student.student_number})
             </option>

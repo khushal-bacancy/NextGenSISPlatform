@@ -35,6 +35,7 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 11:54) Add role-based UI visibility: nav filtering and per-page access guards
 - [x] (2026-03-14 12:34) Add public student registration page with document upload
 - [x] (2026-03-14 12:44) Add admin UI panel to review and approve/reject registration requests
+- [x] (2026-03-14 16:40) Update grades page with school-first filtering so student dropdown is scoped to selected school
 
 ## Quality
 - [x] (2026-03-14 10:05) Add unit tests for validation schemas and API route guards
@@ -63,3 +64,5 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 11:26) Staff Directory & Permissions — Implemented (RBAC + school scoping)
 - [x] (2026-03-14 11:26) Report Generation — Implemented (basic lookup/payload flow)
 - [ ] (2026-03-14 11:26) Communication Hub — Not started
+- [x] (2026-03-14 16:42) Fix grades school-student filtering by sourcing students via enrollments.school_id
+- [x] (2026-03-14 16:47) Show saved grade entries in grades workspace and parent/student portal views

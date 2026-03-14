@@ -56,3 +56,9 @@
   Rationale: Gives super_admin operational control without direct DB access.
 - Vercel dependency installation uses `pnpm install --no-frozen-lockfile`.
   Rationale: Allows security patch upgrades (notably Next.js) to resolve during CI deploy even when repository lockfile is behind.
+- Grade entry now enforces school-first selection before student selection.
+  Rationale: Prevents cross-school student selection mistakes and aligns grade entry flow with multi-school tenant boundaries.
+- Grade/student school scoping in UI must use `enrollments.school_id` as source of truth, not `students` table columns.
+  Rationale: `students` is school-agnostic in schema; enrollment is the tenant binding.
+- Parent/student grade visibility is implemented on `grade_entries` via a dedicated select policy plus portal UI list rendering.
+  Rationale: Keeps grade data in one source table while exposing role-appropriate read access without duplicating records.

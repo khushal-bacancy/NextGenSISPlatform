@@ -55,3 +55,6 @@
 [2026-03-14 18:48] coordinator — Added post-build fix for missing client-reference manifest to unblock Vercel trace phase.
 [2026-03-14 19:02] coordinator — Added `vercel.json` to align Vercel install/build commands with local workflow.
 [2026-03-14 16:28] coordinator — Updated Vercel install command to `pnpm install --no-frozen-lockfile` so patched Next.js versions can resolve during deploy.
+[2026-03-14 16:40] coordinator — Added school-first filtering on the grades form so student options are scoped to the selected school; typecheck passed.
+[2026-03-14 16:42] coordinator — Fixed grades student dropdown population by loading students through enrollments (school_id mapping); typecheck passed.
+[2026-03-14 16:47] coordinator — Added grade entry list UI to grades and portal pages and created RLS migration for guardian/linked-student grade visibility; typecheck passed.

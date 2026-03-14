@@ -32,10 +32,16 @@ export default async function PortalPage() {
     .order("recorded_at", { ascending: false })
     .limit(20);
 
+  const { data: gradeEntries } = await supabase
+    .from("grade_entries")
+    .select("id, student_id, section_id, assessment_name, points_earned, points_possible, submitted_at, sections(section_name, term)")
+    .order("submitted_at", { ascending: false })
+    .limit(30);
+
   return (
     <section className="space-y-4">
       <h1 className="text-2xl font-semibold">Parent and student portal</h1>
-      <StudentPortal transcripts={transcripts ?? []} records={records ?? []} />
+      <StudentPortal transcripts={transcripts ?? []} records={records ?? []} gradeEntries={gradeEntries ?? []} />
     </section>
   );
 }
