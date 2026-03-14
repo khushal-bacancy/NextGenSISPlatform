@@ -43,6 +43,7 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 10:25) Run `pnpm typecheck`
 - [x] (2026-03-14 10:25) Run `pnpm test`
 - [x] (2026-03-14 10:26) Run `pnpm test:e2e`
+- [x] (2026-03-14 16:28) Update Vercel install strategy to allow patched Next.js resolution (`--no-frozen-lockfile`)
 
 ## Repo Setup
 - [x] (2026-03-14 10:31) Add `.env` scaffold with required Supabase variables

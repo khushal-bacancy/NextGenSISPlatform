@@ -54,3 +54,5 @@
   Rationale: Enables immediate login after approval without public password collection.
 - Admin dashboard now exposes list + delete actions for schools and users.
   Rationale: Gives super_admin operational control without direct DB access.
+- Vercel dependency installation uses `pnpm install --no-frozen-lockfile`.
+  Rationale: Allows security patch upgrades (notably Next.js) to resolve during CI deploy even when repository lockfile is behind.

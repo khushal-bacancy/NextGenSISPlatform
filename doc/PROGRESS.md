@@ -54,3 +54,4 @@
 [2026-03-14 18:34] coordinator — Fixed build blockers for Vercel (type errors + static worker crash) and verified `pnpm build` passes.
 [2026-03-14 18:48] coordinator — Added post-build fix for missing client-reference manifest to unblock Vercel trace phase.
 [2026-03-14 19:02] coordinator — Added `vercel.json` to align Vercel install/build commands with local workflow.
+[2026-03-14 16:28] coordinator — Updated Vercel install command to `pnpm install --no-frozen-lockfile` so patched Next.js versions can resolve during deploy.
