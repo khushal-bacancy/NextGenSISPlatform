@@ -15,3 +15,17 @@
   Rationale: Operationally, attendance may be entered by office staff as well as teachers; strict teacher-only policy caused valid staff workflows to fail.
 - Keep primary keys as UUIDs; expose human-readable identifiers via business fields (`student_number`, school names).
   Rationale: UUID PKs preserve consistency/security and avoid schema churn; human-readable lookups remain available for operations/testing.
+- Attendance data entry uses server-fetched dropdown options for `student_id` and `section_id` instead of manual text inputs.
+  Rationale: Avoids repeated FK constraint failures and reduces operator error without weakening referential integrity.
+- Adopted a bootstrap-first RBAC model with `super_admin` and `school_admin` roles.
+  Rationale: Enables safe first-admin initialization while preserving delegated school-level administration for ongoing operations.
+- User provisioning for staff/teacher/admin is invite/create-only through admin API, not public self-signup.
+  Rationale: Prevents unauthorized privilege acquisition and ensures role + school assignment at account creation.
+- RLS policies are now school-scoped for operational tables.
+  Rationale: Enforces tenant boundaries in the database layer independent of frontend behavior.
+- Login UX requires explicit role selection and rejects mismatched role logins by immediately signing out.
+  Rationale: Prevents accidental cross-role access assumptions and makes the active permission context explicit to users at sign-in time.
+- Auth screens share a single visual shell with custom education-themed illustrations and lightweight motion.
+  Rationale: Keeps onboarding/auth flows visually consistent with landing experience while preserving performance and mobile responsiveness.
+- UI navigation and page access are now filtered by role using a centralized permission map.
+  Rationale: Users should only see and access features that match their role permissions, reducing confusion and accidental access.

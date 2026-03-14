@@ -1,6 +1,24 @@
 import { z } from "zod";
 
-export const RoleSchema = z.enum(["admin", "staff", "teacher", "parent", "student"]);
+export const RoleSchema = z.enum([
+  "super_admin",
+  "school_admin",
+  "staff",
+  "teacher",
+  "parent",
+  "student"
+]);
+
+export const SchoolCreateSchema = z.object({
+  name: z.string().min(3).max(150)
+});
+
+export const UserInviteSchema = z.object({
+  email: z.string().email(),
+  fullName: z.string().min(2).max(120),
+  role: z.enum(["school_admin", "staff", "teacher"]),
+  schoolId: z.string().uuid()
+});
 
 export const StudentEnrollmentSchema = z.object({
   firstName: z.string().min(2).max(100),
@@ -37,3 +55,5 @@ export type StudentEnrollmentInput = z.infer<typeof StudentEnrollmentSchema>;
 export type AttendanceEntryInput = z.infer<typeof AttendanceEntrySchema>;
 export type GradeEntryInput = z.infer<typeof GradeEntrySchema>;
 export type ReportQueryInput = z.infer<typeof ReportQuerySchema>;
+export type SchoolCreateInput = z.infer<typeof SchoolCreateSchema>;
+export type UserInviteInput = z.infer<typeof UserInviteSchema>;

@@ -18,7 +18,7 @@ export async function GET(): Promise<Response> {
 
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, full_name, role")
+    .select("id, full_name, role, school_id")
     .eq("id", user.id)
     .maybeSingle();
 

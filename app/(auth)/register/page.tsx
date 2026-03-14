@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { AuthForm } from "@/components/auth/auth-form";
+import { AuthVisualShell } from "@/components/auth/auth-visual-shell";
 
 export const metadata: Metadata = {
   title: "Register | NextGen SIS"
@@ -8,9 +9,16 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center p-6">
-      <h1 className="mb-6 text-2xl font-semibold">Create account</h1>
+    <AuthVisualShell
+      title="Create your account"
+      subtitle="Join the school information system and get assigned to your academic or operational role."
+      imageSrc="/illustrations/auth-students.svg"
+      imageAlt="Illustration of students and school activities"
+      footerText="Already have an account?"
+      footerLinkLabel="Sign in"
+      footerHref="/login"
+    >
       <AuthForm mode="register" />
-    </main>
+    </AuthVisualShell>
   );
 }

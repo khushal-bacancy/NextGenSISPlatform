@@ -18,3 +18,18 @@
 - Added and applied attendance RLS migration so `admin`/`staff` can insert/manage attendance while preserving teacher section scoping.
 - Seeded additional English-named schools and students; documented them in local-only seed reference file.
 - Hardened `.gitignore` to exclude local pnpm store and TypeScript build info files from commits.
+- Updated attendance UI to use valid student/section dropdowns fetched in RSC, preventing section/student foreign-key entry errors from manual UUID typing.
+- Added RBAC upgrade migration introducing `super_admin` and `school_admin` roles with school-scoped RLS policies across schools, enrollments, students, attendance, grades, and reports.
+- Added admin provisioning APIs: `POST/GET /api/admin/schools` and `POST /api/admin/invite`.
+- Added admin setup UI at `/admin` with school creation (super admin) and staff/teacher/school-admin user creation.
+- Added `pnpm bootstrap:super-admin` script (`scripts/bootstrap-super-admin.mjs`) for one-time first super admin initialization.
+- Updated landing page to detect active auth session and show signed-in state with direct logout action.
+- Updated login form to require role selection and validate selected role against the user profile after sign-in.
+- Added reusable server-action based logout control used in dashboard navigation and home page.
+- Added PRD feature coverage matrix to TASKS.md to track implemented vs partial vs not-started features.
+- Improved admin setup UX: after school creation, page data refreshes automatically so school dropdown includes the new school immediately.
+- Redesigned landing page UX and content: removed legacy MVP sentence, added signed-in user name display, and integrated local custom SVG illustrations for hero and feature cards.
+- Redesigned auth pages (login/register/reset) with a shared visual shell and custom school/student SVG assets.
+- Added smooth motion utilities (`reveal-up`, delayed reveals, `float-soft`) and applied them to auth visuals.
+- Added role-based UI visibility: permission map, filtered dashboard navigation, and per-page feature access guards with redirects.
+- Added README with setup, migration, bootstrap, and role access instructions.

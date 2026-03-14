@@ -11,3 +11,12 @@
 [2026-03-14 10:22] coordinator — Added and applied migration to relax attendance RLS so admin/staff can record attendance in addition to section teachers.
 [2026-03-14 11:00] coordinator — Seeded additional schools/students with English names and updated seeded-users.local.md with new records and human-readable student numbers.
 [2026-03-14 11:06] coordinator — Prepared secure initial commit: verified local secrets ignored and expanded .gitignore for local caches/build artifacts.
+[2026-03-14 11:08] coordinator — Fixed attendance FK failure path by loading valid students/sections on server and switching attendance form to dropdown selectors.
+[2026-03-14 11:13] coordinator — Implemented admin bootstrap and provisioning flow: added RBAC migration (`super_admin`/`school_admin`), admin APIs, admin UI, bootstrap script, and applied migration to Supabase.
+[2026-03-14 11:20] coordinator — Added session-aware landing page state, role-select login validation, and logout actions in dashboard/home; all lint/typecheck/test/e2e checks passed.
+[2026-03-14 11:26] coordinator — Added PRD feature checklist matrix with implemented/partial/not-started statuses to TASKS.md.
+[2026-03-14 11:31] coordinator — Fixed admin setup UX by triggering router refresh after school creation so school dropdown options update immediately.
+[2026-03-14 11:36] coordinator — Refreshed landing page UX with custom local illustrations, removed MVP tagline text, and switched signed-in indicator to user full name.
+[2026-03-14 11:41] coordinator — Redesigned login/register/reset screens with custom school/student illustrations and added smooth reveal/float transitions in global styles.
+[2026-03-14 11:54] coordinator — Implemented role-based UI visibility with permission map, filtered dashboard navigation, and per-page access guards with redirects.
+[2026-03-14 12:12] coordinator — Added README with setup, migration, bootstrap, and role access instructions.

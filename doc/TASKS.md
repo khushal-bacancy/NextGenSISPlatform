@@ -16,10 +16,19 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 10:05) Add initial SQL migration for MVP tables with RLS policies
 - [x] (2026-03-14 10:05) Add API routes for students, attendance, academics, reports, and profile
 - [x] (2026-03-14 10:05) Add core server actions for enrollment, attendance, and grade entry
+- [x] (2026-03-14 11:13) Add RBAC migration for `super_admin`/`school_admin` roles and school-scoped RLS policies
+- [x] (2026-03-14 11:13) Add admin APIs for school creation and teacher/staff/school-admin invitation
 
 ## UI Vertical Slice
 - [x] (2026-03-14 10:05) Add dashboard feature pages for enrollment, attendance, grades, portal, reports
 - [x] (2026-03-14 10:05) Add reusable feature components with loading/error placeholders
+- [x] (2026-03-14 11:08) Replace free-text attendance student/section IDs with server-driven dropdowns to prevent FK errors
+- [x] (2026-03-14 11:13) Add Admin Setup page for school provisioning and role-based user creation
+- [x] (2026-03-14 11:20) Improve auth UX: session-aware landing page, role-select login validation, and logout actions
+- [x] (2026-03-14 11:31) Auto-refresh admin setup data after creating a school so invite dropdown updates immediately
+- [x] (2026-03-14 11:36) Redesign landing UX: signed-in name display, remove MVP tagline, and add custom illustration assets
+- [x] (2026-03-14 11:41) Redesign auth screens with school/student illustrations and smooth reveal/float transitions
+- [x] (2026-03-14 11:54) Add role-based UI visibility: nav filtering and per-page access guards
 
 ## Quality
 - [x] (2026-03-14 10:05) Add unit tests for validation schemas and API route guards
@@ -35,3 +44,15 @@ Status legend: `[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked
 - [x] (2026-03-14 10:31) Initialize Git repository
 - [x] (2026-03-14 10:57) Create local seeded-user credentials file and exclude it from Git tracking
 - [x] (2026-03-14 11:00) Seed additional English-named schools/students and update local seed reference
+
+## PRD Feature Matrix
+- [x] (2026-03-14 11:26) Student Registration & Enrollment — Implemented (MVP)
+- [~] (2026-03-14 11:26) Academic Records Management — Partial (core records present, transcript/history workflows pending)
+- [x] (2026-03-14 11:26) Gradebook Integration — Implemented (basic entry + storage)
+- [x] (2026-03-14 11:26) Attendance Tracking — Implemented (basic entry + storage + RBAC)
+- [~] (2026-03-14 11:26) Schedule Management — Partial (courses/sections schema present, full scheduling UX pending)
+- [x] (2026-03-14 11:26) Parent Portal — Implemented (basic)
+- [x] (2026-03-14 11:26) Student Portal — Implemented (basic)
+- [x] (2026-03-14 11:26) Staff Directory & Permissions — Implemented (RBAC + school scoping)
+- [x] (2026-03-14 11:26) Report Generation — Implemented (basic lookup/payload flow)
+- [ ] (2026-03-14 11:26) Communication Hub — Not started

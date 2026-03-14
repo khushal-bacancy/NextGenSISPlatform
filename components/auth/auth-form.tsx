@@ -14,6 +14,8 @@ type AuthFormProps = {
   mode: AuthMode;
 };
 
+const loginRoles = ["super_admin", "school_admin", "staff", "teacher", "parent", "student"] as const;
+
 export function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +27,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
     const email = String(formData.get("email") ?? "");
     const password = String(formData.get("password") ?? "");
+    const selectedRole = String(formData.get("role") ?? "");
 
     if (!email || !password) {
       setErrorMessage("Email and password are required.");
@@ -42,10 +45,39 @@ export function AuthForm({ mode }: AuthFormProps) {
     }
 
     if (mode === "login") {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (!selectedRole) {
+        setErrorMessage("Please select a role before signing in.");
+        setIsLoading(false);
+        return;
+      }
+
+      const {
+        data: { user },
+        error
+      } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
         setErrorMessage(error.message);
       } else {
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user?.id ?? "")
+          .maybeSingle();
+
+        if (profileError || !profile) {
+          await supabase.auth.signOut();
+          setErrorMessage("Profile not found for this account.");
+          setIsLoading(false);
+          return;
+        }
+
+        if (profile.role !== selectedRole) {
+          await supabase.auth.signOut();
+          setErrorMessage(`This account is ${profile.role}. Please choose the correct role.`);
+          setIsLoading(false);
+          return;
+        }
+
         router.push("/enrollment");
       }
     } else {
@@ -70,6 +102,27 @@ export function AuthForm({ mode }: AuthFormProps) {
         <Label htmlFor="password">Password</Label>
         <Input id="password" name="password" type="password" required />
       </div>
+      {mode === "login" ? (
+        <div className="space-y-2">
+          <Label htmlFor="role">Login as role</Label>
+          <select
+            id="role"
+            name="role"
+            className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            defaultValue=""
+            required
+          >
+            <option value="" disabled>
+              Select role
+            </option>
+            {loginRoles.map((role) => (
+              <option key={role} value={role}>
+                {role.replace("_", " ")}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : null}
       {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
       <Button className="w-full" type="submit" disabled={isLoading}>
         {isLoading ? "Submitting..." : mode === "login" ? "Sign in" : "Create account"}

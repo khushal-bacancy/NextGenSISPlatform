@@ -2,20 +2,24 @@ import Link from "next/link";
 import type { Route } from "next";
 import type { ReactNode } from "react";
 
-const links: Array<{ href: Route; label: string }> = [
-  { href: "/enrollment", label: "Enrollment" },
-  { href: "/attendance", label: "Attendance" },
-  { href: "/grades", label: "Grades" },
-  { href: "/portal", label: "Portal" },
-  { href: "/reports", label: "Reports" }
-];
+import { LogoutButton } from "@/components/auth/logout-button";
+import { featureNavMap, roleFeatureMap, type AppRole } from "@/lib/auth/permissions";
 
-export function DashboardShell({ children }: { children: ReactNode }) {
+type DashboardShellProps = {
+  role: AppRole;
+  children: ReactNode;
+};
+
+export function DashboardShell({ role, children }: DashboardShellProps) {
+  const links: Array<{ href: Route; label: string }> = roleFeatureMap[role].map(
+    (feature) => featureNavMap[feature]
+  );
+
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="border-b bg-white">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between p-4">
-          <Link className="text-lg font-semibold" href="/enrollment">
+          <Link className="text-lg font-semibold" href={links[0]?.href ?? "/portal"}>
             NextGen SIS
           </Link>
           <nav className="flex flex-wrap gap-3 text-sm">
@@ -24,6 +28,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
                 {link.label}
               </Link>
             ))}
+            <LogoutButton className="px-2 py-1 text-sm" />
           </nav>
         </div>
       </header>
